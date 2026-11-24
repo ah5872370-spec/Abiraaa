@@ -1,0 +1,58 @@
+package com.example.quotexsignalai;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.graphics.Color;
+import android.view.Gravity;
+import android.widget.*;
+
+public class MainActivity extends Activity {
+
+    boolean bangla = true;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        showApp();
+    }
+
+    void showApp() {
+        LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        layout.setPadding(25, 40, 25, 25);
+        layout.setBackgroundColor(Color.rgb(7,18,36));
+
+        TextView title = new TextView(this);
+        title.setText("QUOTEX SIGNAL AI");
+        title.setTextSize(26);
+        title.setTextColor(Color.WHITE);
+        title.setGravity(Gravity.CENTER);
+        layout.addView(title);
+
+        TextView status = new TextView(this);
+        status.setText(bangla
+            ? "লাইভ ডেটা সংযুক্ত নয়"
+            : "LIVE DATA NOT CONNECTED");
+        status.setTextSize(20);
+        status.setTextColor(Color.CYAN);
+        status.setGravity(Gravity.CENTER);
+        layout.addView(status);
+
+        TextView signal = new TextView(this);
+        signal.setText("WAIT");
+        signal.setTextSize(35);
+        signal.setTextColor(Color.WHITE);
+        signal.setGravity(Gravity.CENTER);
+        layout.addView(signal);
+
+        Button language = new Button(this);
+        language.setText(bangla ? "English" : "বাংলা");
+        language.setOnClickListener(v -> {
+            bangla = !bangla;
+            showApp();
+        });
+        layout.addView(language);
+
+        setContentView(layout);
+    }
+}
